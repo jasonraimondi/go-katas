@@ -1,7 +1,6 @@
 package jason_kata
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -12,24 +11,47 @@ type LongestSubstringWithoutRepeatingCharacters interface {
 type LongestSubstring struct{}
 
 func (c LongestSubstring) lengthOfLongestSubstring(s string) int {
-	var substring string
-	var longestSubstring string
+	repeat := LongestSubstringWithoutRepeat(s)
+	return len(repeat)
+}
+
+func LongestSubstringWithoutRepeat(s string) string {
+	longestStr := ""
+	currentStr := ""
 
 	for _, v := range s {
-		if !strings.Contains(substring, string(v)) {
-			substring += string(v)
-			if len(substring) > len(longestSubstring) {
-				longestSubstring = substring
-			}
-		} else {
-			if len(substring) > len(longestSubstring) {
-				longestSubstring = substring
-			}
-			substring = string(v)
+		letter := string(v)
+		if strings.Contains(currentStr, letter) {
+			currentStr = LongestSubstringUsingLetter(currentStr, letter)
+		}
+
+		if !strings.Contains(currentStr, letter) {
+			currentStr += letter
+		}
+
+		if len(currentStr) >= len(longestStr) {
+			longestStr = currentStr
 		}
 	}
 
-	fmt.Println(longestSubstring)
+	return longestStr
+}
 
-	return len(longestSubstring)
+func LongestSubstringUsingLetter(currentStr string, without string) string {
+	currentSubstringWithout := ""
+
+	if (currentStr == without) {
+		return currentStr
+	}
+
+	for _, iv := range currentStr {
+		letter := string(iv)
+		if letter == without {
+			currentSubstringWithout = ""
+		} else {
+			currentSubstringWithout += letter
+		}
+	}
+
+	return currentSubstringWithout
 }
