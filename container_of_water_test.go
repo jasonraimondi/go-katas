@@ -1,4 +1,4 @@
-package jason_kata
+package kata
 
 import (
 	"testing"

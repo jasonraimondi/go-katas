@@ -1,4 +1,4 @@
-package jason_kata
+package kata
 
 func LengthOfLongestCommonPrefix(strs []string) string {
 	longestPrefix := ""

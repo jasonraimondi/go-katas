@@ -1,4 +1,4 @@
-package jason_kata
+package kata
 
 type ContainerOfWaterCalculator interface {
 	maxArea(height []int) int
